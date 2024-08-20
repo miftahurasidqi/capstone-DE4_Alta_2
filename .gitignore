@@ -1,2 +1,6 @@
 /notes
 .env
+.venv/
+logs/
+dbt_transform/profiles/
+bigqueryKey.json
