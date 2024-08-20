@@ -1,0 +1,22 @@
+dbt_transform:
+  outputs:
+    dev:
+      dataset: namadataset
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+<<<<<<< HEAD:dbt_transform/profiles.example/profiles.yml
+      keyfile: /home/rismanovic/unit3/capstone-DE4_Alta_2/bigqueryKey.json
+      location: EU
+      method: service-account
+      priority: interactive
+      project: alta-de4-capstone-project
+=======
+      keyfile: /Users/wartadi/Desktop/alta/capstone-DE4_Alta_2/alta-de4-capstone-project-a2d5ae60e6a9.json
+      location: EU
+      method: service-account
+      priority: interactive
+      project: ALTA-DE4-Capstone-Project
+>>>>>>> 9c7956a0ae3e13676f0da758a5f9ad9764a9d322:dbt_transform/profiles/profiles.yml
+      threads: 1
+      type: bigquery
+  target: dev

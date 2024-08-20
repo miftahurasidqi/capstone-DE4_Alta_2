@@ -1,6 +1,7 @@
-/notes
-.env
+dbt_transform/profiles/
+notes/
 .venv/
 logs/
-dbt_transform/profiles/
 bigqueryKey.json
+.env
+
