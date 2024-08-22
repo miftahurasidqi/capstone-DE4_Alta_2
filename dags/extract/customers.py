@@ -6,7 +6,7 @@ import pandas as pd
 import json
 
 
-def extract_sales_transactions():
+def extract_customers():
     # Ambil koneksi PostgreSQL dari Airflow
     postgres_conn_id = "postgres_conn_id"
     postgres_conn = BaseHook.get_connection(postgres_conn_id)
@@ -24,24 +24,14 @@ def extract_sales_transactions():
         credentials=credentials,
         project=bq_conn.extra_dejson.get("project"),
     )
-
     # Menentukan dataset dan tabel BigQuery
     dataset_id = "ecommers_de4_team_2"
-    table_id = "raw_sales_transactions"
+    table_id = "raw_customers"
     table_ref = client.dataset(dataset_id).table(table_id)
 
     # Query untuk mengambil data
-    query = "SELECT * FROM sales_transactions_august"
+    query = "SELECT * FROM customers_august"
     df = pd.read_sql(query, engine)
-
-    df["transaction_date"] = pd.to_datetime(df["transaction_date"], errors="coerce")
-    df.rename(columns={"qty": "quantity"}, inplace=True)
-
-    df["harga"] = pd.to_numeric(df["harga"], errors="coerce")
-    df.rename(columns={"harga": "unit_price"}, inplace=True)
-
-    df["amount"] = pd.to_numeric(df["amount"], errors="coerce")
-    print(df.dtypes)
 
     # Load data ke BigQuery
     job = client.load_table_from_dataframe(df, table_ref)

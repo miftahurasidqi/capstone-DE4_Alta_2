@@ -12,3 +12,5 @@ dbt_transform:
       threads: 1
       type: bigquery
   target: dev
+  # /home/miftahurasidqi/my_workspace/Data_engineer/DE_Alta_4/Capstone/dbt_transform/bigqueryKey.json
+  # /usr/app/bigqueryKey.json

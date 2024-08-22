@@ -9,3 +9,5 @@ airflow.session.sql
 data_source/data_source_2/
 data_source/data_source_3/
 data_source/data_source_4/
+BigQuery.session.sql
+airflow_capstone.session.sql
