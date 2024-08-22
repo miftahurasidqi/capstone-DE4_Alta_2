@@ -4,4 +4,8 @@ notes/
 logs/
 bigqueryKey.json
 .env
-
+__pycache__/
+airflow.session.sql
+data_source/data_source_2/
+data_source/data_source_3/
+data_source/data_source_4/
