@@ -29,4 +29,4 @@ WORKDIR /usr/app
 
 FROM base as dbt-bigquery
 COPY requirments.txt requirments.txt
-RUN python -m pip install dbt-adapters==1.4.1 dbt-bigquery==1.8.2 dbt-common==1.7.0 dbt-core==1.8.5 dbt-extractor==0.5.1 dbt-semantic-interfaces==0.5.1
+RUN python -m pip install -r requirments.txt
