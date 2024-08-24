@@ -9,10 +9,8 @@ airflow.session.sql
 server.session.sql
 BigQuery.session.sql
 airflow_capstone.session.sql
-# Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,python,dbt
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,python,dbt
+capstone_ecommerce.session.sql
 
-### dbt ###
 target/
 dbt_modules/
 dbt_packages/

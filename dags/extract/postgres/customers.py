@@ -30,9 +30,10 @@ def extract_customers():
     table_ref = client.dataset(dataset_id).table(table_id)
 
     # Query untuk mengambil data
-    query = "SELECT * FROM customers_august"
+    query = "SELECT * FROM costumers"
     df = pd.read_sql(query, engine)
-
+    print(df.dtypes)
+    print(df.columns)
     # Load data ke BigQuery
     job = client.load_table_from_dataframe(df, table_ref)
     job.result()

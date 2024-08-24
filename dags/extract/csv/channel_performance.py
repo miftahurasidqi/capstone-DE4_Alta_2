@@ -23,16 +23,15 @@ def extract_channel_performance():
     df = df.dropna(subset=["channel_id"])
     # Konversi kolom
     df["channel_id"] = df["channel_id"].astype("Int64", errors="ignore")
-    df["transaction_date"] = pd.to_datetime(df["date"], errors="coerce")
-    df["total_transactions"] = df["total_transactions"].astype("Int64", errors="ignore")
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
     df["total_clicks"] = df["total_clicks"].round().astype("Int64", errors="ignore")
     df["total_impressions"] = (
         df["total_impressions"].round().astype("Int64", errors="ignore")
     )
-    df = df.drop("date", axis=1)
+    df.rename(columns={"date": "transaction_date"}, inplace=True)
+
     print(df.dtypes)
     print(df.columns)
-    print(df)
 
     dataset_id = "ecommers_de4_team_2"
     table_id = "raw_channel_performances"

@@ -5,7 +5,7 @@ import pandas as pd
 import json
 
 
-def extract_costumers_acqusition_costs():
+def extract_acqusition_costs():
     # Koneksi ke BigQuery
     bq_conn_id = "bigquery_con"
     bq_conn = BaseHook.get_connection(bq_conn_id)
@@ -18,23 +18,18 @@ def extract_costumers_acqusition_costs():
         project=bq_conn.extra_dejson.get("project"),
     )
 
-    df = pd.read_csv("/opt/airflow/dags/data_source/costumers_acqusition_costs.csv")
+    df = pd.read_csv("/opt/airflow/dags/data_source/acquisition_cost.csv")
     df = df.dropna(subset=["channel_id"])
 
     # Konversi kolom
     df["channel_id"] = df["channel_id"].astype("Int64", errors="ignore")
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
-    df["total_customers"] = (
-        df["total_customers"].round().astype("Int64", errors="ignore")
-    )
-
     print(df.dtypes)
     print(df.columns)
-    print(df)
 
     dataset_id = "ecommers_de4_team_2"
-    table_id = "raw_costumers_acqusition_costs"
+    table_id = "raw_acqusition_costs"
 
     table_ref = client.dataset(dataset_id).table(table_id)
 

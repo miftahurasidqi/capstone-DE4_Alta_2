@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: ecommers_de4_team_2
+    database: alta-de4-capstone-project  # ini adalah Project ID
+    schema: ecommers_de4_team_2  # ini adalah Dataset ID
+    tables:
+      - name: raw_channel_performances
+        description: "Table containing raw channel performance data"
+
+models:
+  - name: stg_channel_performances
+    description: "A starter dbt model"
+    columns:
+      - name: channel_id
+        description: "The primary key for this table"
+        tests:
+          - not_null

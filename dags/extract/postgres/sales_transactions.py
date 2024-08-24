@@ -31,17 +31,14 @@ def extract_sales_transactions():
     table_ref = client.dataset(dataset_id).table(table_id)
 
     # Query untuk mengambil data
-    query = "SELECT * FROM sales_transactions_august"
+    query = "SELECT * FROM sales_transactions"
     df = pd.read_sql(query, engine)
 
     df["transaction_date"] = pd.to_datetime(df["transaction_date"], errors="coerce")
     df.rename(columns={"qty": "quantity"}, inplace=True)
 
-    df["harga"] = pd.to_numeric(df["harga"], errors="coerce")
-    df.rename(columns={"harga": "unit_price"}, inplace=True)
-
-    df["amount"] = pd.to_numeric(df["amount"], errors="coerce")
     print(df.dtypes)
+    print(df.columns)
 
     # Load data ke BigQuery
     job = client.load_table_from_dataframe(df, table_ref)
