@@ -7,12 +7,40 @@ sources:
     tables:
       - name: raw_channel_performances
         description: "Table containing raw channel performance data"
+      - name: raw_acqusition_costs
+        description: "Table containing raw acquisition cost"
+      - name: raw_sales_transactions
+        description: "Table containing raw sales transactions"
+      - name: raw_products
+        description: "Table containing raw products"
+      - name: raw_customers
+        description: "Table containing raw customers"
+      - name: raw_channels
+        description: "Table containing channels"
+        
+# models:
+#   - name: stg_channel_performances
+#     description: "stg_channel_performances"
+#     columns:
+#       - name: channel_id
+#         description: "The primary key for this table"
+#         tests:
+#           - not_null
 
-models:
-  - name: stg_channel_performances
-    description: "A starter dbt model"
-    columns:
-      - name: channel_id
-        description: "The primary key for this table"
-        tests:
-          - not_null
+#   - name: stg_acqusition_costs
+#     description: "stg_acqusition_costs"
+#     columns:
+#       - name: id
+#         description: "The primary key for this table"
+#         data_tests:
+#           - unique
+#           - not_null
+
+#   - name: stg_sales_transactions
+#     description: "stg_sales_transactions"
+#     columns:
+#       - name: id
+#         description: "The primary key for this table"
+#         data_tests:
+#           - unique
+#           - not_null

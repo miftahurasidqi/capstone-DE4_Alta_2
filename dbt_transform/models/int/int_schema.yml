@@ -1,0 +1,27 @@
+version: 2
+# models:
+#   - name: stg_channel_performances
+#     description: "stg_channel_performances"
+#     columns:
+#       - name: channel_id
+#         description: "The primary key for this table"
+#         tests:
+#           - not_null
+
+#   - name: stg_acqusition_costs
+#     description: "stg_acqusition_costs"
+#     columns:
+#       - name: id
+#         description: "The primary key for this table"
+#         data_tests:
+#           - unique
+#           - not_null
+
+#   - name: stg_sales_transactions
+#     description: "stg_sales_transactions"
+#     columns:
+#       - name: id
+#         description: "The primary key for this table"
+#         data_tests:
+#           - unique
+#           - not_null
