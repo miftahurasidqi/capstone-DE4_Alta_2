@@ -1,16 +1,20 @@
 dbt_transform:
   outputs:
     dev:
-      dataset: namadataset
+      dataset: ecommers_de4_team_2
       job_execution_timeout_seconds: 300
       job_retries: 1
-      keyfile: /home/rismanovic/unit3/capstone-DE4_Alta_2/bigqueryKey.json
-      location: EU
+      keyfile: /home/miftahurasidqi/my_workspace/Data_engineer/DE_Alta_4/Capstone/dbt_transform/bigqueryKey.json
+      location: asia-southeast2
       method: service-account
       priority: interactive
       project: alta-de4-capstone-project
       threads: 1
       type: bigquery
   target: dev
+
+  # keyfile untuk menjalankan di terminal lokal
   # /home/miftahurasidqi/my_workspace/Data_engineer/DE_Alta_4/Capstone/dbt_transform/bigqueryKey.json
+
+  # keyfile untuk menjalankan di airflow
   # /usr/app/bigqueryKey.json

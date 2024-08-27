@@ -2,7 +2,10 @@ from airflow.providers.google.cloud.operators.bigquery import (
     BigQueryCreateEmptyTableOperator,
 )
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.docker_operator import DockerOperator
 from airflow.operators.dummy_operator import DummyOperator
+from airflow.models import Variable
+from docker.types import Mount
 from datetime import datetime
 from airflow import DAG
 
@@ -14,6 +17,7 @@ from extract.postgres.channels import extract_channels
 from extract.postgres.products import extract_products
 
 dataset_id = "ecommers_de4_team_2"
+local_path = Variable.get("localpath")
 
 dag = DAG(
     dag_id="extract_e_commerce_data",
@@ -152,6 +156,52 @@ extract_sales_transactions_data = PythonOperator(
     dag=dag,
 )
 
+# run dbt
+dbt_run_cmd = DockerOperator(
+    task_id="dbt_run_cmd",
+    image="dbt_transform_capstone",
+    container_name="dbt_container",
+    api_version="auto",
+    auto_remove=True,
+    command="bash -c 'dbt run'",
+    docker_url="tcp://docker-proxy:2375",
+    network_mode="bridge",
+    mounts=[
+        Mount(
+            source=f"{local_path}/dbt_transform", target="/usr/app", type="bind"
+        ),
+        Mount(
+            source=f"{local_path}/dbt_transform/profiles",
+            target="/root/.dbt",
+            type="bind",
+        ),
+    ],
+    mount_tmp_dir=False,
+    dag=dag,
+)
+
+dbt_test_cmd = DockerOperator(
+    task_id="dbt_test_cmd",
+    image="dbt_transform_capstone",
+    container_name="dbt_container",
+    api_version="auto",
+    auto_remove=True,
+    command="bash -c 'dbt test'",
+    docker_url="tcp://docker-proxy:2375",
+    network_mode="bridge",
+    mounts=[
+        Mount(
+            source=f"{local_path}/dbt_transform", target="/usr/app", type="bind"
+        ),
+        Mount(
+            source=f"{local_path}/dbt_transform/profiles",
+            target="/root/.dbt",
+            type="bind",
+        ),
+    ],
+    mount_tmp_dir=False,
+    dag=dag,
+)
 end = DummyOperator(task_id="end")
 
 
@@ -169,5 +219,7 @@ end = DummyOperator(task_id="end")
     >> extract_customers_data
     >> extract_products_data
     >> extract_sales_transactions_data
+    >> dbt_run_cmd
+    >> dbt_test_cmd
     >> end
 )
