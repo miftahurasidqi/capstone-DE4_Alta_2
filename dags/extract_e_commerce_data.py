@@ -92,6 +92,7 @@ create_bq_table_products = BigQueryCreateEmptyTableOperator(
         {"name": "product_id", "type": "INTEGER", "mode": "REQUIRED"},
         {"name": "product_name", "type": "STRING", "mode": "NULLABLE"},
         {"name": "price", "type": "FLOAT", "mode": "NULLABLE"},
+        {"name": "base_price", "type": "FLOAT", "mode": "NULLABLE"},
     ],
     gcp_conn_id="bigquery_con",
     dag=dag,
@@ -163,7 +164,7 @@ dbt_run_cmd = DockerOperator(
     container_name="dbt_container",
     api_version="auto",
     auto_remove=True,
-    command="bash -c 'dbt run'",
+    command="bash -c 'dbt debug'",
     docker_url="tcp://docker-proxy:2375",
     network_mode="bridge",
     mounts=[
@@ -186,7 +187,7 @@ dbt_test_cmd = DockerOperator(
     container_name="dbt_container",
     api_version="auto",
     auto_remove=True,
-    command="bash -c 'dbt test'",
+    command="bash -c 'dbt debug'",
     docker_url="tcp://docker-proxy:2375",
     network_mode="bridge",
     mounts=[

@@ -34,7 +34,9 @@ def extract_products():
     df = pd.read_sql(query, engine)
 
     df["harga"] = pd.to_numeric(df["harga"], errors="coerce")
+    df["harga_dasar"] = pd.to_numeric(df["harga"], errors="coerce")
     df.rename(columns={"harga": "price"}, inplace=True)
+    df.rename(columns={"harga_dasar": "base_price"}, inplace=True)
 
     # Load data ke BigQuery
     job = client.load_table_from_dataframe(df, table_ref)
