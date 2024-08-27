@@ -43,3 +43,9 @@ models:
     int:
       +materialized: table
       +schema: int
+    fct:
+      +materialized: table
+      +schema: fct
+    mart:
+      +materialized: table
+      +schema: mart
