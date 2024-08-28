@@ -164,13 +164,11 @@ dbt_run_cmd = DockerOperator(
     container_name="dbt_container",
     api_version="auto",
     auto_remove=True,
-    command="bash -c 'dbt debug'",
+    command="bash -c 'dbt run'",
     docker_url="tcp://docker-proxy:2375",
     network_mode="bridge",
     mounts=[
-        Mount(
-            source=f"{local_path}/dbt_transform", target="/usr/app", type="bind"
-        ),
+        Mount(source=f"{local_path}/dbt_transform", target="/usr/app", type="bind"),
         Mount(
             source=f"{local_path}/dbt_transform/profiles",
             target="/root/.dbt",
@@ -187,13 +185,11 @@ dbt_test_cmd = DockerOperator(
     container_name="dbt_container",
     api_version="auto",
     auto_remove=True,
-    command="bash -c 'dbt debug'",
+    command="bash -c 'dbt test'",
     docker_url="tcp://docker-proxy:2375",
     network_mode="bridge",
     mounts=[
-        Mount(
-            source=f"{local_path}/dbt_transform", target="/usr/app", type="bind"
-        ),
+        Mount(source=f"{local_path}/dbt_transform", target="/usr/app", type="bind"),
         Mount(
             source=f"{local_path}/dbt_transform/profiles",
             target="/root/.dbt",
@@ -206,20 +202,33 @@ dbt_test_cmd = DockerOperator(
 end = DummyOperator(task_id="end")
 
 
+start >> [
+    create_bq_table_acqusition_costs,
+    create_bq_table_channel_performances,
+    create_bq_table_channels,
+    create_bq_table_customers,
+    create_bq_table_products,
+    create_bq_table_sales_transactions,
+]
+
+
+create_bq_table_acqusition_costs >> extract_acqusition_costs_data
+create_bq_table_channel_performances >> extract_channel_performance_data
+create_bq_table_channels >> extract_channels_data
+create_bq_table_customers >> extract_customers_data
+create_bq_table_products >> extract_products_data
+create_bq_table_sales_transactions >> extract_sales_transactions_data
+
+
 (
-    start
-    >> create_bq_table_acqusition_costs
-    >> create_bq_table_channel_performances
-    >> create_bq_table_channels
-    >> create_bq_table_customers
-    >> create_bq_table_products
-    >> create_bq_table_sales_transactions
-    >> extract_acqusition_costs_data
-    >> extract_channel_performance_data
-    >> extract_channels_data
-    >> extract_customers_data
-    >> extract_products_data
-    >> extract_sales_transactions_data
+    [
+        extract_acqusition_costs_data,
+        extract_channel_performance_data,
+        extract_channels_data,
+        extract_customers_data,
+        extract_products_data,
+        extract_sales_transactions_data,
+    ]
     >> dbt_run_cmd
     >> dbt_test_cmd
     >> end
