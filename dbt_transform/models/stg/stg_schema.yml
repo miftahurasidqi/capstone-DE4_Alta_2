@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: ecommers_de4_team_2
-    database: alta-de4-capstone-project  # ini adalah Project ID
-    schema: ecommers_de4_team_2  # ini adalah Dataset ID
+    database: alta-de4-capstone-project # ini adalah Project ID
+    schema: ecommers_de4_team_2 # ini adalah Dataset ID
     tables:
       - name: raw_channel_performances
         description: "Table containing raw channel performance data"
@@ -17,11 +17,69 @@ sources:
         description: "Table containing raw customers"
       - name: raw_channels
         description: "Table containing channels"
-# models:
-#   - name: stg_channel_performances
-#     description: "A starter dbt model"
-#     columns:
-#       - name: channel_id
-#         description: "The primary key for this table"
-#         tests:
-#           - not_null
+
+models:
+  - name: stg_acquisition_costs
+    description: "Staging table for acquisition costs"
+    columns:
+      - name: channel_id
+        description: "Identifier for the channel"
+        data_tests:
+          - not_null
+      - name: date
+        description: "The date of the acquisition cost"
+        data_tests:
+          - not_null
+      - name: total_cost
+        description: "Total acquisition cost"
+        data_tests:
+          - not_null
+
+  - name: stg_channel_performances
+    description: "Staging table for channel performances"
+    columns:
+      - name: channel_id
+        description: "Identifier for the channel"
+        data_tests:
+          - not_null
+      - name: transaction_date
+        description: "The date of the transaction"
+        data_tests:
+          - not_null
+      - name: total_clicks
+        description: "Total number of clicks"
+        data_tests:
+          - not_null
+      - name: total_impressions
+        description: "Total number of impressions"
+        data_tests:
+          - not_null
+
+  - name: stg_sales_transactions
+    description: "Staging table for sales transactions"
+    columns:
+      - name: transaction_id
+        description: "Unique identifier for each transaction"
+        data_tests:
+          - not_null
+          - unique
+      - name: transaction_date
+        description: "The date of the transaction"
+        data_tests:
+          - not_null
+      - name: customer_id
+        description: "Identifier for the customer"
+        data_tests:
+          - not_null
+      - name: channel_id
+        description: "Identifier for the channel"
+        data_tests:
+          - not_null
+      - name: product_id
+        description: "Identifier for the product"
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Quantity of products sold"
+        data_tests:
+          - not_null

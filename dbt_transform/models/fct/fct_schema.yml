@@ -1,27 +1,17 @@
 version: 2
 models:
-  - name: int_channel_performance_metrics
-    description: "int_channel_performances"
+  - name: int_channel_performances_metrics_details
+    description: "fct_channel_performances"
     columns:
       - name: channel_id
         description: "The primary key for this table"
         tests:
           - not_null
 
-  - name: int_customer_aquisition_cost_daily
-    description: "int_acqusition_costs"
+  - name: fct_sales_transactions_daily
+    description: "fct_sales_transactions_daily"
     columns:
-      - name: id
+      - name: channel_id
         description: "The primary key for this table"
         data_tests:
-          - unique
-          - not_null
-
-  - name: int_sales_transactions_details
-    description: "int_sales_transactions"
-    columns:
-      - name: id
-        description: "The primary key for this table"
-        data_tests:
-          - unique
           - not_null
