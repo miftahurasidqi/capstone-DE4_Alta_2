@@ -1,4 +1,4 @@
-select
+SELECT
     st.transaction_id,
     st.transaction_date,
     ch.channel_id,
@@ -9,9 +9,12 @@ select
     c.age,
     p.product_id,
     p.product_name,
-    p.price unit_price,
+    p.base_price,
+    p.price AS unit_price,
     st.quantity,
+    (st.quantity * p.base_price) AS total_base_price,
     (st.quantity * p.price) AS sales_amount,
+    ((st.quantity * p.price) - (st.quantity * p.base_price)) AS profit,
     CASE
         WHEN LEFT(c.customer_phone, 2) = '62' THEN 'Indonesia'
         WHEN LEFT(c.customer_phone, 2) = '65' THEN 'Singapore'
@@ -24,10 +27,10 @@ select
         WHEN LEFT(c.customer_phone, 3) = '855' THEN 'Cambodia'
         WHEN LEFT(c.customer_phone, 3) = '673' THEN 'Brunei'
         ELSE 'Negara Tidak Diketahui'
-    END AS country,
-from
+    END AS country
+FROM
     {{ ref('stg_sales_transactions') }} st
-left join 
+LEFT JOIN 
     {{ ref('stg_customers') }} c 
     ON st.customer_id = c.customer_id
 LEFT JOIN 

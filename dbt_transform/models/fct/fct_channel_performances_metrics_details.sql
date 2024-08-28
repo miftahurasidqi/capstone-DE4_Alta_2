@@ -3,7 +3,7 @@ WITH dayly_sales_transactions AS (
         transaction_date,
         channel_id,
         channel_name,
-        ROUND(SUM(sales_amount), 4) AS total_sales_amount
+        ROUND(SUM(profit), 4) AS total_profit,
     FROM
         {{ ref('int_sales_transactions_details') }}
     GROUP BY
@@ -32,10 +32,10 @@ SELECT
     cp.conversion_rate,
     ac.total_cost,
     ac.cost_per_customer,
-    st.total_sales_amount,
+    st.total_profit,
     CASE
         WHEN ac.total_cost = 0 THEN NULL  -- Menghindari pembagian dengan nol
-        ELSE ROUND(((st.total_sales_amount - ac.total_cost) / ac.total_cost), 4)
+        ELSE ROUND(((st.total_profit - ac.total_cost) / ac.total_cost), 4)
     END AS roi
 FROM
     {{ ref('int_channel_performance_metrics') }} cp

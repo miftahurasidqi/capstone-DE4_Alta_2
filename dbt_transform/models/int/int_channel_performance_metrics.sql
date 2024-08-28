@@ -33,17 +33,3 @@ LEFT JOIN
 ORDER BY
     cp.transaction_date,
     cp.channel_id
-
--- SELECT
---     cp.channel_id,
---     cp.transaction_date,
---     cp.total_clicks,
---     cac.total_cost
--- FROM
---     {{ ref('stg_channel_performances') }} cp
--- LEFT JOIN
---     {{ ref('stg_acquisition_costs') }} cac
--- ON
---     cp.channel_id = cac.channel_id
--- AND 
---     cp.transaction_date = cac.date
