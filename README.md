@@ -1,8 +1,8 @@
-# E-Commerce Data ELT Pipeline Project
+# Green Motion : Data ELT Pipeline Project
 
-## Deskripsi Proyek
+## Deskripsi Project
 
-Proyek ini adalah pipeline data untuk mengekstrak, memuat, dan mentransformasi (ELT) data transaksi penjualan dari sumber data PostgreSQL ke BigQuery. Kami menggunakan Apache Airflow untuk mengotomatiskan dan menjadwalkan proses ekstraksi dan pemuatan data. Setelah data mentah berada di BigQuery, **dbt (data build tool)** digunakan untuk melakukan transformasi data untuk analisis lebih lanjut.
+Green Motion Project dibuat untuk mengimplementasikan ELT dengan menggunakan pipeline data untuk mengekstrak, memuat, dan mentransformasi data transaksi penjualan dari sumber data PostgreSQL ke BigQuery. Dengan menggunakan Apache Airflow untuk mengotomatiskan dan menjadwalkan proses ekstraksi dan pemuatan data. Setelah data mentah berada di BigQuery, **dbt (data build tool)** digunakan untuk melakukan transformasi data untuk analisis lebih lanjut.
 
 ## Tools
 
