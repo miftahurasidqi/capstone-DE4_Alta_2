@@ -135,6 +135,9 @@ Sebelum memulai, pastikan Anda telah menginstal dan mengkonfigurasi komponen-kom
      pilih menu `admin > conections`
      ![bigquery_conections](img/bigquery_conn.png)
 
+     pilih menu `admin > variabels`
+     ![localpath_variable](img/localpath.png)
+
    - jalankan dag
 
      pilih menu `DAGs > extract_e_commerce_data` dan trigger DAG
