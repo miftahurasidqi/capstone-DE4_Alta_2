@@ -1,7 +1,5 @@
--- remove duplicates 
-
-select distinct
+SELECT DISTINCT
     channel_id,
     channel_name,
     type_channel
-from {{ source('ecommers_de4_team_2', 'raw_channels') }}
+FROM {{ source('ecommers_de4_team_2', 'raw_channels') }}
