@@ -3,7 +3,7 @@ SELECT
     channel_id,
     channel_name,
     SUM(total_transactions) AS total_transactions_weekly,
-    ROUND(SUM(cost_per_customer), 4) AS total_cost_per_customer,
+    ROUND(SUM(cost_per_transactions), 4) AS total_cost_per_customer,
     ROUND(SUM(total_profit), 4) AS total_profit,
     ROUND(SUM(roi), 4) AS total_roi
 FROM
