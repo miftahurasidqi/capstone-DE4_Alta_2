@@ -30,6 +30,14 @@ Sebelum memulai, pastikan Anda telah menginstal dan mengkonfigurasi komponen-kom
 - **PostgreSQL** database
 - **dbt** >= 0.20
 
+## Data Pipeline Design
+
+  ![ERD](img/DataPipelineDesign.png)
+
+## ERD
+
+  ![ERD](img/ERD.png)
+
 ## Instalasi & Konfigurasi
 
 1. **Clone repositori ini:**
@@ -134,6 +142,8 @@ Sebelum memulai, pastikan Anda telah menginstal dan mengkonfigurasi komponen-kom
 
      pilih menu `admin > conections`
      ![bigquery_conections](img/bigquery_conn.png)
+
+   - setup Localpath dbt
 
      pilih menu `admin > variabels`
      ![localpath_variable](img/localpath.png)

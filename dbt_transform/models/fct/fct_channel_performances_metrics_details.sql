@@ -18,6 +18,7 @@ SELECT
     cp.channel_id,
     cp.channel_name,
     cp.transaction_date,
+    cp.total_impressions,
     cp.total_clicks,
     cp.total_transactions,
     cp.conversion_rate,
